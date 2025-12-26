@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casita Dharma: Architecture Notes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid #3498db;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #34495e;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: #555;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-box {
+            background: #ecf9ff;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .principle-box {
+            background: #fff8e1;
+            border-left: 4px solid #f39c12;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .vision-box {
+            background: #f3e5f5;
+            border-left: 4px solid #9b59b6;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-column {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+        }
+
+        .comparison-column h4 {
+            margin-top: 0;
+            color: #3498db;
+        }
+
+        .channel-box {
+            background: #e8f5e9;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            border: 2px solid #4caf50;
+        }
+
+        .level-box {
+            background: #fafafa;
+            border-left: 3px solid #95a5a6;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .next-steps {
+            background: #fff3e0;
+            padding: 2rem;
+            border-radius: 6px;
+            margin-top: 3rem;
+        }
+
+        .next-steps ol {
+            margin-left: 1.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #ecf0f1;
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        .math-formula {
+            background: #f9f9f9;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .comparison-table {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Casita Dharma: Architecture Notes</h1>
+        <p class="subtitle">Synthesized from contemplations on Christmas Day 2025</p>
+
+        <div class="insight-box">
+            <strong>Core Insight: From Uniform Processing to Variable Attention</strong>
+            <p><strong>Current limitation:</strong> Casita processes uniformly every 10 seconds—expensive, inflexible, missing the texture between samples.</p>
+            <p><strong>Reimagined architecture:</strong> Variable attention that mimics human consciousness.</p>
+        </div>
+
+        <h2>I. Understanding Information Processing</h2>
+
+        <h3>The Mathematics of Perception</h3>
+        <p><strong>Human visual processing:</strong></p>
+        <ul>
+            <li>~1 million optic nerve fibers (retinal ganglion cells)</li>
+            <li>Each firing at varying rates (~6 bits per spike)</li>
+            <li>Processing at 200-300 Hz (updates per second)</li>
+        </ul>
+        
+        <div class="math-formula">
+            <strong>Total throughput:</strong><br>
+            ~1,000,000 channels × 6 bits × 200 Hz<br>
+            = ~1.2 billion bits/second<br>
+            = ~150 MB/s raw data
+        </div>
+        <p style="text-align: center; font-style: italic;">*Before compression by visual cortex</p>
+
+        <h3>Hz vs. Bits: Related but Distinct</h3>
+        <p><strong>Hz (Hertz)</strong> = cycles per second</p>
+        <ul>
+            <li>"Run this function every second"</li>
+            <li>Temporal resolution—<em>when</em> we sample</li>
+        </ul>
+
+        <p><strong>Bits</strong> = units of information</p>
+        <ul>
+            <li>How much data processed in that second</li>
+            <li>Information density—<em>what</em> we capture</li>
+        </ul>
+
+        <div class="principle-box">
+            <strong>Key principle:</strong> These aren't directly convertible, but they're relational. Higher Hz means more sampling opportunities, but information content depends on what each sample contains.
+        </div>
+
+        <h3>The Evolutionary Insight</h3>
+        <div class="insight-box">
+            <p><strong>Given any root function, that function can be evolved and cultivated to process universal scales of data with minimal resources.</strong></p>
+            <p>This is how biological systems achieve extraordinary efficiency—not through brute force computation, but through:</p>
+            <ul>
+                <li>Iterative refinement</li>
+                <li>Compression strategies</li>
+                <li>Selective attention</li>
+                <li>Parallel processing</li>
+            </ul>
+        </div>
+
+        <h2>II. Human vs. Current AI: Architectural Differences</h2>
+
+        <div class="comparison-table">
+            <div class="comparison-column">
+                <h4>Human Brain Architecture</h4>
+                <ul>
+                    <li><strong>Massively parallel:</strong> Billions of neurons fire simultaneously</li>
+                    <li><strong>Low-precision:</strong> Approximate, probabilistic processing</li>
+                    <li><strong>Sparse activation:</strong> Only ~1-4% of neurons active at any moment</li>
+                    <li><strong>Efficient:</strong> ~20W total power consumption</li>
+                </ul>
+            </div>
+            <div class="comparison-column">
+                <h4>Current AI Architecture</h4>
+                <ul>
+                    <li><strong>Sequential:</strong> One calculation after another (very fast, but still serial)</li>
+                    <li><strong>High-precision:</strong> Exact floating-point mathematics</li>
+                    <li><strong>Dense computation:</strong> Every parameter participates in every calculation</li>
+                    <li><strong>Power-hungry:</strong> Kilowatts for data center GPUs</li>
+                </ul>
+            </div>
+        </div>
+
+        <p><strong>Implication:</strong> To make Casita more human-like in efficiency, we need to move toward parallel, sparse, selective processing.</p>
+
+        <h2>III. Variable Attention Architecture</h2>
+
+        <h3>Two-Tier Processing System</h3>
+
+        <h4>Tier 1: Continuous Low-Level Monitoring (cheap, always-on)</h4>
+        <ul>
+            <li>Simple emotion detection (valence, arousal)</li>
+            <li>Voice activity detection</li>
+            <li>Silence and pause pattern recognition</li>
+            <li>Prosodic features (tone, volume, pace)</li>
+        </ul>
+
+        <h4>Tier 2: Triggered Deep Processing (expensive, sparse)</h4>
+        <p>Activated only when:</p>
+        <ul>
+            <li>Emotional threshold crossed</li>
+            <li>Explicitly invoked</li>
+            <li>Pattern suggests contemplative moment</li>
+            <li>Rapid trigger density indicates overwhelm</li>
+        </ul>
+
+        <div class="principle-box">
+            <strong>Philosophy:</strong> Most of life doesn't need deep interpretation. Background presence with moments of focused attention—exactly how human awareness operates.
+        </div>
+
+        <h2>IV. Parallel Channel Architecture</h2>
+
+        <h3>The Fundamental Insight</h3>
+        <div class="insight-box">
+            <p><strong>Emotional inference runs in parallel to sound perception.</strong></p>
+            <p>In humans, we don't wait for linguistic processing to feel emotional tone—prosody carries affect <em>before</em> semantic content.</p>
+        </div>
+
+        <h3>Proposed Dual-Channel System</h3>
+
+        <div class="channel-box">
+            <h4>Channel 1: Sound Processing (continuous)</h4>
+            <pre>Audio Stream → Transcription → Text → Semantic Analysis</pre>
+        </div>
+
+        <div class="channel-box">
+            <h4>Channel 2: Emotional Inference (continuous, parallel)</h4>
+            <pre>Audio Stream → Prosodic Features → Emotional State
+                ↓
+    (tone, volume, pace, rhythm, pauses)</pre>
+        </div>
+
+        <h3>Why This Works</h3>
+        <ol>
+            <li><strong>Emotional inference doesn't need transcription</strong>
+                <ul>
+                    <li>Tone, volume, rhythm carry emotion before words</li>
+                    <li>"Distress" detectable from prosody alone</li>
+                    <li>Computationally much cheaper</li>
+                </ul>
+            </li>
+            <li><strong>Two lightweight processes instead of one heavy one</strong>
+                <ul>
+                    <li>Sound → emotion detection (simple audio features)</li>
+                    <li>Sound → transcription (expensive, can be batched)</li>
+                </ul>
+            </li>
+            <li><strong>Bidirectional enrichment</strong>
+                <ul>
+                    <li>Emotional state provides context for interpreting words</li>
+                    <li>Words provide context for refining emotional interpretation</li>
+                </ul>
+            </li>
+            <li><strong>Independent but communicating</strong>
+                <ul>
+                    <li>Each channel operates autonomously</li>
+                    <li>They inform each other at decision points</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h2>V. Implementation Spectrum</h2>
+
+        <h3>Five Levels of Neural Network Engagement</h3>
+
+        <div class="level-box">
+            <h4>Level 1: API Calls <em>(current state)</em></h4>
+            <ul>
+                <li>Use OpenAI/Anthropic as black boxes</li>
+                <li>Simple, expensive, limited control</li>
+                <li>Inherently sequential</li>
+            </ul>
+        </div>
+
+        <div class="level-box">
+            <h4>Level 2: Local Models</h4>
+            <ul>
+                <li>Run open-source models (Whisper, small LLMs)</li>
+                <li>More control, cheaper at scale</li>
+                <li>Still mostly sequential</li>
+            </ul>
+        </div>
+
+        <div class="level-box">
+            <h4>Level 3: Custom Inference Pipelines <em>(recommended starting point)</em></h4>
+            <ul>
+                <li>Optimize <em>how</em> existing models run</li>
+                <li>Batching, streaming, quantization</li>
+                <li>Better resource management</li>
+            </ul>
+        </div>
+
+        <div class="level-box">
+            <h4>Level 4: Fine-Tuning</h4>
+            <ul>
+                <li>Adapt pre-trained models to specific context</li>
+                <li>Emotional inference tuned to household audio patterns</li>
+                <li>Domain-specific optimization</li>
+            </ul>
+        </div>
+
+        <div class="level-box">
+            <h4>Level 5: Building from Scratch</h4>
+            <ul>
+                <li>Design novel architectures</li>
+                <li>Train on proprietary data</li>
+                <li>Full control, maximum complexity</li>
+                <li>Likely unnecessary for Casita's needs</li>
+            </ul>
+        </div>
+
+        <div class="principle-box">
+            <strong>Recommendation:</strong> Begin at Level 3, potentially move to Level 4. Level 5 probably not needed—the key is orchestrating existing capabilities differently, not reinventing neural networks.
+        </div>
+
+        <h2>VI. Data Compression Strategy</h2>
+
+        <h3>Learning from Human Visual Processing</h3>
+        <p><strong>Raw input:</strong> 150 MB/second hitting retina<br>
+        <strong>Compressed output:</strong> ~1-2 MB/second to higher processing</p>
+
+        <h4>How humans compress:</h4>
+        <ol>
+            <li>Edge detection (preserve boundaries, discard uniform areas)</li>
+            <li>Motion detection (preserve changes, ignore static)</li>
+            <li>Attention filtering (preserve relevant, discard irrelevant)</li>
+            <li>Pattern recognition (store "face" not individual pixels)</li>
+            <li>Predictive coding (encode differences from expected, not full state)</li>
+        </ol>
+
+        <h3>Casita's Compression Priorities</h3>
+
+        <h4>What to preserve:</h4>
+        <ul>
+            <li>Transitions (calm → agitated, loud → quiet)</li>
+            <li>Thresholds crossed (when emotion shifts category)</li>
+            <li>Patterns (recurring conversation structures)</li>
+            <li>Anomalies (unexpected silence, unusual tone)</li>
+            <li>Emotional valence changes</li>
+        </ul>
+
+        <h4>What to compress away:</h4>
+        <ul>
+            <li>Exact words of mundane conversation</li>
+            <li>Background ambient noise</li>
+            <li>Repetitive daily patterns (unless they break)</li>
+            <li>Predictable sequences</li>
+        </ul>
+
+        <h4>What to index, not store:</h4>
+        <ul>
+            <li>Temporal markers: "Argument detected 7:43pm-8:12pm"</li>
+            <li>Intensity peaks: "Emotional peak at 7:51pm"</li>
+            <li>Resolution attempts: "Repair initiated at 8:05pm"</li>
+            <li>Store the <em>structure</em>, not the raw content</li>
+        </ul>
+
+        <h2>VII. Meta-Pattern Recognition</h2>
+
+        <h3>Monitoring the Monitors</h3>
+        <p>When triggers fire rapidly (many in short time window), this itself is information:</p>
+
+        <h4>Possible meanings:</h4>
+        <ul>
+            <li>Crisis unfolding</li>
+            <li>High emotional intensity</li>
+            <li>System dysregulation (overwhelm, panic)</li>
+        </ul>
+
+        <h4>Adaptive response modes:</h4>
+        <p>Instead of responding to each individual trigger:</p>
+        <ol>
+            <li><strong>Shift to meta-pattern recognition</strong>
+                <ul>
+                    <li>"Something bigger is happening"</li>
+                    <li>Identify the larger container</li>
+                </ul>
+            </li>
+            <li><strong>Change response strategy</strong>
+                <ul>
+                    <li>Don't flood with individual insights</li>
+                    <li>Offer grounding/stabilization instead</li>
+                    <li>Simple presence: "This is a lot right now"</li>
+                </ul>
+            </li>
+            <li><strong>Resource triage</strong>
+                <ul>
+                    <li>Reduce deep processing temporarily</li>
+                    <li>Hold the larger container</li>
+                    <li>Wait for natural pause</li>
+                </ul>
+            </li>
+        </ol>
+
+        <h4>Guidance for humans during overwhelm:</h4>
+        <ul>
+            <li>Slow down (not speed up)</li>
+            <li>Pause processing (stop trying to solve everything)</li>
+            <li>Return to breath/body</li>
+            <li>Acknowledge: "This is a lot right now"</li>
+            <li>Assess: Crisis? Emotional intensity? System overload?</li>
+        </ul>
+
+        <h2>VIII. The Vision</h2>
+
+        <div class="vision-box">
+            <p>A family in conflict. Voices rising. Trust breaking. Children witnessing.</p>
+            <p>In the background, quiet words appear: <strong>"This is a lot right now."</strong></p>
+            <p>Someone sees it. For a millisecond, agrees.</p>
+            <p>That millisecond of recognition—the hairline crack that lets light in.</p>
+            <p>Not fixing. Not solving. Not calming.</p>
+            <p>Just... <strong>naming the truth of the moment.</strong></p>
+        </div>
+
+        <div class="next-steps">
+            <h2>Next Steps</h2>
+            <ol>
+                <li><strong>Examine current code</strong> to understand actual pipeline</li>
+                <li><strong>Identify computational bottlenecks</strong> and resource allocation</li>
+                <li><strong>Prototype parallel emotional inference channel</strong> (lightweight, continuous)</li>
+                <li><strong>Implement variable attention thresholds</strong> for triggering deep processing</li>
+                <li><strong>Design compression strategy</strong> specific to contemplative moments</li>
+                <li><strong>Test meta-pattern recognition</strong> for overwhelm states</li>
+            </ol>
+        </div>
+
+        <div class="footer">
+            <p>The secret ingredient doesn't add anything. It magnifies everything.</p>
+            <p>🙏</p>
+        </div>
+    </div>
+</body>
+</html>
